@@ -1,0 +1,223 @@
+<?php
+
+ include_once "connection.php";
+
+//Adding isset button function on submit button.
+if(isset($_POST["submit"])) {
+   
+
+if (!empty($_FILES["uploadfile"]["name"])) {
+    for($i=0; $i<count($_FILES["uploadfile"]["name"]); $i++) {
+    
+
+$ImageSavefolder = "admin/upload/";
+$name=$_POST['name'];
+$location=$_POST['location'];
+$email=$_POST['email'];
+$pwd=$_POST['pwd'];
+$pincode=$_POST['pincode'];
+$category=$_POST['category'];
+$description=$_POST['description'];
+$sreference_code=$_POST['sreference_code'];
+move_uploaded_file($_FILES["uploadfile"]["tmp_name"][$i] , "$ImageSavefolder".$_FILES["uploadfile"]["name"][$i]);
+$sql = "INSERT into stores (name,imagetext,location,email,pwd,pincode,category,description,sreference_code)  VALUES('$name','".$_FILES['uploadfile']['name'][$i]."','$location','$email','$pwd','$pincode','$category','$description','$sreference_code')";
+$ExecQuery = MySQLi_query($conn, $sql); }
+$msg="Your Login Id & Password";
+
+mail("$email","your id&password",$msg);
+if($ExecQuery){
+    echo "<script>alert('Store Added Successfully!');</script>";
+}else{
+    echo "<script>alert('Please Try Again!');</script>";
+}
+ }
+
+}
+
+?>
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    
+             
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Fuerte Developers, IMF, I am Fuerte, Fuerte Developerrs Rajkot">
+    <title>Add Store</title>
+
+    
+  <link rel="icon" href="img/lts_logo1.png" type="image/icon type">
+  
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- BASE CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/vendors.css" rel="stylesheet">
+
+    <!-- YOUR CUSTOM CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+ <style> 
+
+</style>  
+
+</head>
+
+<body id="register_bg">
+    		
+
+
+<nav id="menu" class="fake_menu"></nav>
+
+<div id="login">
+    <aside>
+        <figure>
+            <a href="index.php"><img src="img/lts_logo1.png" width="180" height="100" alt="" class="logo_sticky"></a>
+        </figure>
+        <div class="divider"><span>Enter Your company Details</span></div>
+        <form method = "POST" enctype="multipart/form-data" action="" autocomplete="off">
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder=" company Name" method = "post" required>
+                <i class="ti-user"></i>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="location" placeholder="company Location" method = "post" required>
+                <i class="icon_pin_alt"></i>
+            </div>
+             <div class="form-group">
+                <input class="form-control" type="email" name="email" placeholder="company Email" method = "post" required>
+                <i class="icon_mail_alt"></i>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="pwd" placeholder="password" method = "post" required>
+                <i class="icon_lock_alt"></i>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="number" name="pincode" placeholder="company Location Code eg(243403)" method = "post"  required>
+                <i class="icon_table"></i>
+            </div>
+              <div class="form-group">
+                   <select class="form-control" name="category" method = "post">
+                       <option value="">select category</option>
+                         
+                                                              <option  value="Shopping Online" >Shopping Online</option>
+                                                              <option  value="Sports Goods" >Sports Goods</option>
+                                                              <option  value="Training Institute" >Training Institute</option>
+                                                              <option  value="Anything on Hire" >Anything on Hire</option>
+                                                              <option  value="Mechanical Parts & Spares" >Mechanical Parts & Spares</option>
+                                                              <option  value="Apparel & Garments" >Apparel & Garments</option>
+                                                              <option  value="Sports Goods, Toys & Games" >Sports Goods, Toys & Games</option>
+                                                              <option  value="Restaurants" >Restaurants</option>
+                                                              <option  value="Real Estate" >Real Estate</option>
+                                                              <option  value="Jobs" >Jobs</option>
+                                                              <option  value="Building & Construction" >Building & Construction</option>
+                                                              <option  value="Chemicals, Dyes & Solvents" >Chemicals, Dyes & Solvents</option>
+                                                              <option  value="Hand & Machine Tools" >Hand & Machine Tools</option>
+                                                              <option  value="Medical & Healthcare" >Medical & Healthcare</option>
+                                                              <option  value="Furniture & Supplies" >Furniture & Supplies</option>
+                                                              <option  value="Agriculture & Farming" >Agriculture & Farming</option>
+                                                              <option  value="Food & Beverages" >Food & Beverages</option>
+                                                              <option  value="Housewares & Supplies" >Housewares & Supplies</option>
+                                                              <option  value="Metals, Alloys & Minerals" >Metals, Alloys & Minerals</option>
+                                                              <option  value="Books & Stationery" >Books & Stationery</option>
+                                                              <option  value="Handicrafts & Decoratives" >Handicrafts & Decoratives</option>
+                                                              <option  value="Electronics & Electrical" >Electronics & Electrical</option>
+                                                              <option  value="Packaging Machines & Goods" >Packaging Machines & Goods</option>
+                                                              <option  value="Textiles, Yarn & Fabrics" >Textiles, Yarn & Fabrics</option>
+                                                              <option  value="Lon services & Lab Instruments & Supplies" >Lon services & Lab Instruments & Supplies</option>
+                                                              <option  value="Industrial Supplies" >Industrial Supplies</option>
+                                                              <option  value="Industrial Plants & Machinery" >Industrial Plants & Machinery</option>
+                                                              <option  value="Automobile, Parts & Spares" >Automobile, Parts & Spares</option>
+                                                              <option  value="Kitchen Utensils & Appliances" >Kitchen Utensils & Appliances</option>
+                                                              <option  value="Cosmetics & Personal Care" >Cosmetics & Personal Care</option>
+                                                              <option  value="Home Textile & Furnishing" >Home Textile & Furnishing</option>
+                                                              <option  value="Engineering Services" >Engineering Services</option>
+                                                              <option  value="Gems, Jewelry & Astrology" >Gems, Jewelry & Astrology</option>
+                                                              <option  value="Computer & IT Solutions" >Computer & IT Solutions</option>
+                                                              <option  value="Fashion Accessories & Gear" >Fashion Accessories & Gear</option>
+                                                              <option  value="Herbal & Ayurvedic Product" >Herbal & Ayurvedic Product</option>
+                                                              <option  value="Security Systems & Services" >Security Systems & Services</option>
+                                                              <option  value="Telecom Equipment & Goods" >Telecom Equipment & Goods</option>
+                                                              <option  value="Paper & Paper Products" >Paper & Paper Products</option>
+                                                              <option  value="Bags, Belts & Wallets" >Bags, Belts & Wallets</option>
+                                                              <option  value="Media, PR & Publishing" >Media, PR & Publishing</option>
+                                                              <option  value="Marble, Granite & Stones" >Marble, Granite & Stones</option>
+                                                              <option  value="Event Planner & Organizer" >Event Planner & Organizer</option>
+                                                              <option  value="IT & Telecom Services" >IT & Telecom Services</option>
+                                                              <option  value="Product Rental & Leasing" >Product Rental & Leasing</option>
+                                                              <option  value="Transportation & Logistics" >Transportation & Logistics</option>
+                                                              <option  value="Business & Audit Services" >Business & Audit Services</option>
+                                                              <option  value="Financial & Legal Services" >Financial & Legal Services</option>
+                                                              <option  value="Education & Training" >Education & Training</option>
+                                                              <option  value="Travel, Tourism & Hotels" >Travel, Tourism & Hotels</option>
+                                                              <option  value="Call Center & BPO Services" >Call Center & BPO Services</option>
+                                                              <option  value="Bicycle, Rickshaw & Spares" >Bicycle, Rickshaw & Spares</option>
+                                                              <option  value="R&D and Testing Labs" >R&D and Testing Labs</option>
+                                                              <option  value="Architecture & Interiors" >Architecture & Interiors</option>
+                                                              <option  value="HR Planning & Recruitment" >HR Planning & Recruitment</option>
+                                                              <option  value="Rail, Shipping & Aviation" >Rail, Shipping & Aviation</option>
+                                                              <option  value="House Keeping Services" >House Keeping Services</option>
+                                                              <option  value="Leather Products" >Leather Products</option>
+                                                              <option  value="Consumer Electronics" >Consumer Electronics</option>
+                                                              <option  value="Energy & Power" >Energy & Power</option>
+                                                              <option  value="Environment" >Environment</option>
+                                                              <option  value="Health & Beauty" >Health & Beauty</option>
+                                                              <option  value="Home Supplies" >Home Supplies</option>
+                                                              <option  value="Jewelry" >Jewelry</option>
+                                                              <option  value="Jute & Jute Products" >Jute & Jute Products</option>
+                                                              <option  value="Machines & Equipment" >Machines & Equipment</option>
+                                                              <option  value="Natural Stones" >Natural Stones</option>
+                                                              <option  value="Office Supplies & Stationery" >Office Supplies & Stationery</option>
+                                                              <option  value="Plastic & Plastic     Products" >Plastic & Plastic     Products</option>
+                                                              <option  value="Printing Products" >Printing Products</option>
+                                                              <option  value="Tools & Equipment" >Tools & Equipment</option>
+                                                              <option  value="Toys & Games" >Toys & Games</option>
+                                                              <option  value="Employment Services" >Employment Services</option>
+                                                              <option  value="Outsourcing Services" >Outsourcing Services</option>
+</select> 
+                
+            </div>
+            <div class="form-group"> 
+                <textarea class="form-control" type="text" name="description" placeholder="company description" style="height: 130px; width: 340px" method = "post" required></textarea>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="file" name="uploadfile[]" id="uploadfile" placeholder="Add Image" method = "post" required multiple>
+                <!--                <i class="icon_mail_alt"></i>-->
+            </div>
+             <div class="form-group">
+                <input class="form-control" type="number" name="sreference_code" placeholder="Reference Code" method = "post" required>
+                <i class="icon_group"></i>
+            </div>
+             <button id="rzp-button11" type="submit" name="submit" class="btn_1 rounded full-width">Add company</button>
+            
+        </form>
+       
+        <div class="copy">© 2019 LTS Online</div>
+    </aside>
+</div>
+<!-- /login -->
+		
+
+<!-- COMMON SCRIPTS -->
+<script src="js/common_scripts.js"></script>
+<script src="js/functions.js"></script>
+<script src="assets/validate.js"></script>
+<!-- script  src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_live_PCiomz1ylwIAwY" data-amount="23600" data-name="Fuerte Developers" data-description="Add Store to IMF (I am Fuerte)" data-image="logoA.png" data-prefill.name="Rahul Kumar" data-prefill.email="info@fuertedevelopers.com"  data-theme.color="#F37254">
+
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+</script -->
+
+
+<!-- SPECIFIC SCRIPTS -->
+<!--<script src="js/pw_strenght.js"></script>-->
+
+</body>
+</html>
